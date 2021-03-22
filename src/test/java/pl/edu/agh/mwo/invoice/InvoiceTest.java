@@ -1,6 +1,8 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -149,9 +151,8 @@ public class InvoiceTest {
         invoice.addProduct(new TaxFreeProduct("Kalafior", new BigDecimal("3.50")), 4);
         invoice.addProduct(new DairyProduct("Rafaello", new BigDecimal("15")), 10);
         invoice.addProduct(new OtherProduct("Ryz", new BigDecimal("3.23")), 18);
-        String[] a = invoice.printInvoice();
-        String b = a[3];
-        Assert.assertEquals("Product: Ryz Quantity: 18 Price: 3.23", b);
+        List<String> x = Arrays.asList(invoice.printInvoice());
+        Assert.assertTrue(x.contains("Product: Ryz Quantity: 18 Price: 3.23"));
     }
     
     @Test
