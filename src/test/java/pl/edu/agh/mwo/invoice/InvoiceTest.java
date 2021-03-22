@@ -123,4 +123,46 @@ public class InvoiceTest {
     	Assert.assertEquals(invoice.getNumber(), invoice.getNumber());
     }
     
+    @Test
+    public void testIfPrintInvoiceHasInvoiceNumber() {  	
+        invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
+        invoice.addProduct(new DairyProduct("Chedar", new BigDecimal("10")), 3);
+        invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
+        String[] a = invoice.printInvoice();
+        String b = a[0];
+        int c = Integer.parseInt(b);
+        Assert.assertEquals(invoice.getNumber(), c);
+    }
+    
+    @Test
+    public void testIfPrintInvoiceHasProducts() {  	
+        invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
+        invoice.addProduct(new DairyProduct("Chedar", new BigDecimal("10")), 3);
+        invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
+        String[] a = invoice.printInvoice();
+        String b = a[1];
+        Assert.assertEquals("Product: Chleb Quantity: 2 Price: 5", b);
+    }
+    
+    @Test
+    public void testIfPrintInvoiceHasOtherProducts() {  	
+        invoice.addProduct(new TaxFreeProduct("Kalafior", new BigDecimal("3.50")), 4);
+        invoice.addProduct(new DairyProduct("Rafaello", new BigDecimal("15")), 10);
+        invoice.addProduct(new OtherProduct("Ryz", new BigDecimal("3.23")), 18);
+        String[] a = invoice.printInvoice();
+        String b = a[3];
+        Assert.assertEquals("Product: Ryz Quantity: 18 Price: 3.23", b);
+    }
+    
+    @Test
+    public void testIfPrintInvoiceHasTotalQuantity() {  	
+        invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
+        invoice.addProduct(new DairyProduct("Chedar", new BigDecimal("10")), 3);
+        invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
+        String[] a = invoice.printInvoice();
+        String b = a[a.length-1];
+        int c = Integer.parseInt(b);
+        Assert.assertEquals(1005, c);
+    }
+    
 }

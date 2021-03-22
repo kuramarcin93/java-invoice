@@ -48,4 +48,28 @@ public class Invoice {
 		// TODO Auto-generated method stub
 		return number;
 	}
+
+	public String[] printInvoice() {
+		StringBuilder buildInvoice = new StringBuilder();
+	    BigDecimal totalQuantity = BigDecimal.ZERO;
+        buildInvoice.append(getNumber());
+        buildInvoice.append("\n");
+	        for (Product product : products.keySet()) {
+	            BigDecimal quantity = new BigDecimal(products.get(product));
+	            totalQuantity = totalQuantity.add(quantity);
+	            buildInvoice.append("Product: ");	
+	            buildInvoice.append(product.getName());
+	            buildInvoice.append(" ");
+	            buildInvoice.append("Quantity: ");	            
+	            buildInvoice.append(quantity);
+	            buildInvoice.append(" ");
+	            buildInvoice.append("Price: ");	
+	            buildInvoice.append(product.getPrice());
+	            buildInvoice.append("\n");
+	        }
+        buildInvoice.append(totalQuantity);
+	    String readyInvoice = buildInvoice.toString();
+		String[] printInvoice = readyInvoice.split("\n");
+		return printInvoice;
+	}
 }
