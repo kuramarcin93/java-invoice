@@ -138,16 +138,6 @@ public class InvoiceTest {
     
     @Test
     public void testIfPrintInvoiceHasProducts() {  	
-        invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
-        invoice.addProduct(new DairyProduct("Chedar", new BigDecimal("10")), 3);
-        invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
-        String[] a = invoice.printInvoice();
-        String b = a[1];
-        Assert.assertEquals("Product: Chleb Quantity: 2 Price: 5", b);
-    }
-    
-    @Test
-    public void testIfPrintInvoiceHasOtherProducts() {  	
         invoice.addProduct(new TaxFreeProduct("Kalafior", new BigDecimal("3.50")), 4);
         invoice.addProduct(new DairyProduct("Rafaello", new BigDecimal("15")), 10);
         invoice.addProduct(new OtherProduct("Ryz", new BigDecimal("3.23")), 18);
