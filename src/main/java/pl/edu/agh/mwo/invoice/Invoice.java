@@ -2,14 +2,18 @@ package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
+    
     private final int number = Math.abs(new Random().nextInt());
-	private Map<Product, Integer> products = new HashMap<Product, Integer>();
+    
+	private Map<Product, Integer> products = new LinkedHashMap<Product, Integer>();
 
     public void addProduct(Product product) {
         addProduct(product, 1);
@@ -19,7 +23,11 @@ public class Invoice {
         if (product == null || quantity <= 0) {
             throw new IllegalArgumentException();
         }
+        if(products.containsKey(product)) {
+        products.replace(product, products.get(product) + quantity);
+        } else {
         products.put(product, quantity);
+        }
     }
 
     public BigDecimal getNetTotal() {

@@ -9,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.edu.agh.mwo.invoice.Invoice;
 import pl.edu.agh.mwo.invoice.product.DairyProduct;
 import pl.edu.agh.mwo.invoice.product.OtherProduct;
 import pl.edu.agh.mwo.invoice.product.Product;
@@ -154,6 +153,16 @@ public class InvoiceTest {
         String b = a[a.length-1];
         int c = Integer.parseInt(b);
         Assert.assertEquals(1005, c);
+    }
+    
+    @Test
+    public void testIfInvoiceHasDuplicatedProducts() {      
+        Product chlebek = new TaxFreeProduct("Chleb", new BigDecimal("10"));
+        invoice.addProduct(chlebek, 2);
+        invoice.addProduct(chlebek, 4);
+        invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
+        String[] a = invoice.printInvoice();
+        Assert.assertEquals(4, a.length);
     }
     
 }
