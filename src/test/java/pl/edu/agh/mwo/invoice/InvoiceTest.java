@@ -105,27 +105,27 @@ public class InvoiceTest {
     public void testInvoiceWithNegativeQuantity() {
         invoice.addProduct(new DairyProduct("Zsiadle mleko", new BigDecimal("5.55")), -1);
     }
-    
+
     @Test
     public void testInvoiceHasNumber() {
-    	int number = invoice.getNumber();
-    	Assert.assertTrue(number > 0);
+        int number = invoice.getNumber();
+        Assert.assertTrue(number > 0);
     }
-    
+
     @Test
     public void testTwoInvoicesHaveDifferentNumbers() {
-    	int number = invoice.getNumber();
-    	int number2 = new Invoice().getNumber();   	
-    	Assert.assertNotEquals(number, number2);
+        int number = invoice.getNumber();
+        int number2 = new Invoice().getNumber();
+        Assert.assertNotEquals(number, number2);
     }
-    
+
     @Test
-    public void testTheSameInvoiceHasTheSameNumber() {  	
-    	Assert.assertEquals(invoice.getNumber(), invoice.getNumber());
+    public void testTheSameInvoiceHasTheSameNumber() {
+        Assert.assertEquals(invoice.getNumber(), invoice.getNumber());
     }
-    
+
     @Test
-    public void testIfPrintInvoiceHasInvoiceNumber() {  	
+    public void testIfPrintInvoiceHasInvoiceNumber() {
         invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
         invoice.addProduct(new DairyProduct("Chedar", new BigDecimal("10")), 3);
         invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
@@ -134,29 +134,29 @@ public class InvoiceTest {
         int c = Integer.parseInt(b);
         Assert.assertEquals(invoice.getNumber(), c);
     }
-    
+
     @Test
-    public void testIfPrintInvoiceHasProducts() {  	
+    public void testIfPrintInvoiceHasProducts() {
         invoice.addProduct(new TaxFreeProduct("Kalafior", new BigDecimal("3.50")), 4);
         invoice.addProduct(new DairyProduct("Rafaello", new BigDecimal("15")), 10);
         invoice.addProduct(new OtherProduct("Ryz", new BigDecimal("3.23")), 18);
         List<String> x = Arrays.asList(invoice.printInvoice());
         Assert.assertTrue(x.contains("Product: Ryz Quantity: 18 Price: 3.23"));
     }
-    
+
     @Test
-    public void testIfPrintInvoiceHasTotalQuantity() {  	
+    public void testIfPrintInvoiceHasTotalQuantity() {
         invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
         invoice.addProduct(new DairyProduct("Chedar", new BigDecimal("10")), 3);
         invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
         String[] a = invoice.printInvoice();
-        String b = a[a.length-1];
+        String b = a[a.length - 1];
         int c = Integer.parseInt(b);
         Assert.assertEquals(1005, c);
     }
-    
+
     @Test
-    public void testIfInvoiceHasDuplicatedProducts() {      
+    public void testIfInvoiceHasDuplicatedProducts() {
         Product chlebek = new TaxFreeProduct("Chleb", new BigDecimal("10"));
         invoice.addProduct(chlebek, 2);
         invoice.addProduct(chlebek, 4);
@@ -164,5 +164,5 @@ public class InvoiceTest {
         String[] a = invoice.printInvoice();
         Assert.assertEquals(4, a.length);
     }
-    
+
 }
